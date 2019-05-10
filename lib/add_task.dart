@@ -5,17 +5,12 @@ class AddTask extends StatefulWidget {
   AddTask(this._title);
   @override
   _AddTaskState createState() => _AddTaskState();
-
 }
 
 class _AddTaskState extends State<AddTask> {
-
   final formKey = new GlobalKey<FormState>();
   String dropdownValue = 'One';
-  String _value = '';
-
-  
-
+  String value = '';
 
   @override
   Widget build(BuildContext context) {
@@ -26,24 +21,23 @@ class _AddTaskState extends State<AddTask> {
         child: new Form(
           key: formKey,
           child: new Column(
-
             children: <Widget>[
               DropdownButton<String>(
-                    isExpanded: true,
-                    value: dropdownValue,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        dropdownValue = newValue;
-                      });
-                    },
-                    items: <String>['One', 'Two', 'Free', 'Four']
+                isExpanded: true,
+                value: dropdownValue,
+                onChanged: (String newValue) {
+                  setState(() {
+                    dropdownValue = newValue;
+                  });
+                },
+                items: <String>['One', 'Two', 'Free', 'Four']
                     .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                ),
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
               TextField(
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
@@ -53,16 +47,14 @@ class _AddTaskState extends State<AddTask> {
                 ),
               ),
               MaterialButton(
-                onPressed: (){},
-
+                onPressed: () {},
                 textColor: Colors.white,
                 color: Colors.red,
                 child: new Text(
-                    '保存',
-                    style: TextStyle(fontSize: 20.0),
+                  '保存',
+                  style: TextStyle(fontSize: 20.0),
                 ),
               ),
-             
             ],
           ),
         ),

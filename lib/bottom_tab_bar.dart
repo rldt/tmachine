@@ -11,33 +11,33 @@ class BottomTabBar extends StatefulWidget {
 class _BottomTabBarState extends State<BottomTabBar> {
   int _index = 0;
   @override
-
   void initState() {
     super.initState();
   }
 
-  showView(){
-    if(_index == 0){
+  showView() {
+    if (_index == 0) {
       return StatisticsList('清单');
-    }else{
+    } else {
       return Kit('运动');
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: showView(),
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return AddTask('添加任务');
           }));
         },
         tooltip: 'Increment',
         child: new Icon(Icons.add),
-      ), 
-      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked, 
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         color: Colors.red,
         shape: CircularNotchedRectangle(),
