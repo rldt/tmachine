@@ -7,12 +7,15 @@ class BottomTabBar extends StatefulWidget {
   @override
   _BottomTabBarState createState() => _BottomTabBarState();
 }
+
 class _BottomTabBarState extends State<BottomTabBar> {
   int _index = 0;
   @override
+
   void initState() {
     super.initState();
   }
+
   showView(){
     if(_index == 0){
       return StatisticsList('清单');
@@ -20,6 +23,7 @@ class _BottomTabBarState extends State<BottomTabBar> {
       return Kit('运动');
     }
   }
+  
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
