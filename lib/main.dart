@@ -1,56 +1,77 @@
 import 'package:flutter/material.dart';
 
-// runApp 接受Widget作为根树
-void main() => runApp(new App());
-
-class App extends StatelessWidget {
+class TabbedAppBarSample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Tmachine',
-      theme: new ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: new Scaffold(
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const RaisedButton(
-                onPressed: null,
-                child: Text('Disabled Button', style: TextStyle(fontSize: 20)),
-              ),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                child: const Text('Enabled Button',
-                    style: TextStyle(fontSize: 20)),
-              ),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF0D47A1),
-                        Color(0xFF1976D2),
-                        Color(0xFF42A5F5),
-                      ],
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text('Gradient Button',
-                      style: TextStyle(fontSize: 20)),
-                ),
-              ),
-            ],
+      home: new DefaultTabController(
+        length: choices.length,
+        child: new Scaffold(
+          appBar: new AppBar(
+            title: const Text('Tabbed AppBar'),
+            bottom: new TabBar(
+              isScrollable: true,
+              tabs: choices.map((Choice choice) {
+                return new Tab(
+                  text: choice.title,
+                  icon: new Icon(choice.icon),
+                );
+              }).toList(),
+            ),
+          ),
+          body: new TabBarView( 
+            children: choices.map((Choice choice) {
+              return new Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: new ChoiceCard(choice: choice),
+              );
+            }).toList(),
           ),
         ),
       ),
     );
   }
+}
+
+class Choice {
+  const Choice({ this.title, this.icon });
+  final String title;
+  final IconData icon;
+}
+
+const List<Choice> choices = const <Choice>[
+  const Choice(title: '小汽车', icon: Icons.directions_car),
+  const Choice(title: '山地车', icon: Icons.directions_bike),
+  const Choice(title: '轮船', icon: Icons.directions_boat),
+  const Choice(title: '公交车', icon: Icons.directions_bus),
+  const Choice(title: '火车', icon: Icons.directions_railway),
+  const Choice(title: '跑步', icon: Icons.directions_walk),
+];
+
+class ChoiceCard extends StatelessWidget {
+  const ChoiceCard({ Key key, this.choice }) : super(key: key);
+
+  final Choice choice;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle textStyle = Theme.of(context).textTheme.display1;
+    return new Card(
+      color: Colors.white,
+      child: new Center(
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            new Icon(choice.icon, size: 128.0, color: textStyle.color),
+            new Text(choice.title, style: textStyle),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(new TabbedAppBarSample());
 }
