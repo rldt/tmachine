@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'bottom_tab_bar.dart';
 
-void main() => runApp(new MyApp());
+// runApp 接受Widget作为根树
+void main() => runApp(new App());
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    var title = 'Web Images';
-
     return new MaterialApp(
-      title: title,
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text(title),
-        ),
-        body: new Image.network(
-          'https://github.com/flutter/website/blob/master/_includes/code/layout/lakes/images/lake.jpg?raw=true',
-        ),
+      title: 'Tmachine',
+      theme: new ThemeData(
+        primarySwatch: Colors.red,
       ),
+      home: BottomTabBar(),
     );
   }
 }
+
